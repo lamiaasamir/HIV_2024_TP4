@@ -23,7 +23,7 @@ class LLMTestGenerator(AbstractGenerator):
         Returns:
             str: The generated assertions as a string.
         """
-        input_ids = self.tokenizer(prompt, return_tensors="pt").input_ids
+        input_ids = self.tokenizer(prompt, return_tensors="pt").input_ids.to(self.model.device)
         generated_ids = self.model.generate(input_ids, max_length=512)
         output_text = self.tokenizer.decode(generated_ids[0], skip_special_tokens=True)
         return output_text

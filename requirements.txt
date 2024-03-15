@@ -1,2 +1,3 @@
 transformers
 coverage
+torch

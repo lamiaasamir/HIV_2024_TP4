@@ -1,5 +1,4 @@
-from poly_llm.to_test.separate_paren_groups import separate_paren_groups
-from poly_llm.to_test.parse_nested_parens import parse_nested_parens
+
 from poly_llm.to_test.file_name_check import file_name_check
 from poly_llm.common.abstract_executor import AbstractExecutor
 from poly_llm.common.prompt_generator import PromptGenerator
@@ -19,12 +18,15 @@ if __name__ == '__main__':
     model = T5ForConditionalGeneration.from_pretrained(model_name) 
 
     llm_generator = LLMTestGenerator(model, tokenizer, file_name_check)
-    prompt = prompt_generator.generate_prompt(few_shot_examples=['''def test_file_name_check(): \n 
+    prompt = prompt_generator.generate_prompt()
+
+    '''few_shot_examples=[def test_file_name_check(): \n 
     assert file_name_check("example.txt") == 'Yes'  \n
-    assert file_name_check("1example.dll") == 'No' \n'''])
+    assert file_name_check("1example.dll") == 'No' \n]'''
 
     print(prompt)
     test, test_name = llm_generator.create_test_function(prompt)
+    print(test)
     filename = "test_generated.py"
 
     llm_generator.write_test_to_file(test, filename=filename)
