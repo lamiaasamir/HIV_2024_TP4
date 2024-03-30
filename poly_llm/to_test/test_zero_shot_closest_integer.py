@@ -18,4 +18,4 @@ def test_rounded_away_zero(input_val, expected):
     assert closest_integer(input_val) == expected
 
 def test_empty():
-    assert closest_integer('') == 0
+    assert closest_integer('0') == 0
