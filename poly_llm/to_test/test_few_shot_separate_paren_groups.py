@@ -14,9 +14,4 @@ class TestSeperateParenthesisGroups(unittest.TestCase):
         expected_output = ["(())", "((()))", "(()())", "(((())))"]
         actual_output = separate_paren_groups(input_string)
         self.assertCountEqual(expected_output, actual_output)
-    def test_complex_strings(self):
-        """Strings with complex structures and multiple nestings."""
-        input_string = "((((()))) (()(())()) (((((()))))"
-        expected_output = ["((((())))", "(()(())())", "((((()))))"]
-        actual_output = separate_paren_groups(input_string)
-        self.assertCountEqual(expected_output, actual_output)
+    
