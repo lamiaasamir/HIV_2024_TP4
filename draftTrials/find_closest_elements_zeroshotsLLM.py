@@ -26,8 +26,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 model_name = "Salesforce/codet5-large-ntp-py"
 tokenizer = AutoTokenizer.from_pretrained(model_name) #tokenizer#AutoTokenizer.from_pretrained("codellama/CodeLlama-7b-Python-hf")#
 model = T5ForConditionalGeneration.from_pretrained(model_name).to(device)
-
 llm_generator = LLMTestGenerator(model, tokenizer, find_closest_elements)
+
 prompt = prompt_generator.generate_prompt()
 
 print(f"THE PROMPT {prompt}")
@@ -46,7 +46,8 @@ input("Make sure generated tests are correct")
 
 module_name = filename.split(".")[0]
 function_name = test_name
-
+print("mod name  ",module_name)
+print("func name  ",function_name)
 # Dynamically import the module
 module = importlib.import_module(module_name)
 function = getattr(module, function_name)
