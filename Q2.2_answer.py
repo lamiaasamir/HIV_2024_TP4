@@ -55,20 +55,13 @@ for func,func_path in functions_to_test_and_paths:
   
     executor2 = AbstractExecutor(test_func)
     coverage_data = executor2._execute_input(func)
-    print(coverage_data)
+    # print(coverage_data)
 
     if coverage_data['coverage']:
         covered_lines = coverage_data['coverage']['covered_lines']
-        num_statements = coverage_data['coverage']['num_statements']
-        # missing_lines = coverage_data['coverage']['missing_lines']
-        excluded_lines = coverage_data['coverage']['excluded_lines']
-
-        # Adjusting total executable lines by subtracting excluded lines
-        total_executable_lines = num_statements - excluded_lines
-
-        # Calculating adjusted line coverage percentage
-        line_coverage_percentage = (covered_lines / total_executable_lines) * 100
-
+        line_coverage_percentage = coverage_data['coverage']['percent_covered']
+        
+        #calculating branch coverage
         total_branches = coverage_data['coverage']['num_branches'] 
         total_covered_branches=coverage_data['coverage']['covered_branches'] + 0.5 * coverage_data['coverage']['num_partial_branches']
         branch_coverage_percentage = (total_covered_branches / total_branches) * 100
@@ -78,29 +71,5 @@ for func,func_path in functions_to_test_and_paths:
         print("LLM generated an incorrect test case, please edit the generated tests or rerun")
 
 
-
-
-
-    
-
-
-
-    
-    # Execute the test function
-    # try:
-    #     test_func()
-    # except Exception as e:
-    #     print(f"An error occurred while executing {test_name}: {e}")
-
-
-    # Stop coverage measurement and save
-    # cov.stop()
-    # cov.save()
-
-    # Report coverage metrics for the function
-    # print(f"\nCoverage report for {func.__name__}:")
-    # cov.report()
-  
-
-
+    print("Coverage Data: ",coverage_data)
 

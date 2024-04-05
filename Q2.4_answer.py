@@ -17,29 +17,38 @@ from poly_llm.to_test.separate_paren_groups import separate_paren_groups
 
 few_shot_examples = {
     "closest_integer.py": [
-        ["assert closest_integer(\"10\") == 10\n"],
-        ["assert closest_integer(\"14.5\") == 15\n"],
-        ["assert closest_integer(\"10\") == 10\n", "assert closest_integer(\"14.5\") == 15\n"],
+        ["assert closest_integer(\"0\") == 0\n"],
+        ["assert closest_integer(\"-14.5\") == -15\n"],
+        ["assert closest_integer(\"0\") == 0\n", "assert closest_integer(\"-14.5\") == -15\n"],
     ],
     "file_name_check.py": [
-        ["assert file_name_check(\"example.txt\") == 'Yes'\n"],
-        ["assert file_name_check(\"1example.dll\") == 'No'\n", "assert file_name_check('.txt') == 'No'\n"],
+        ["assert file_name_check('example.exe.dll') == 'No''\n"],
+        ["""assert file_name_check('example.txt') == 'Yes'\n"assert file_name_check('example.exe.dll') == 'No'\n""", """assert file_name_check('example.exe.dll') == 'No'\nassert file_name_check(\"example.txt\") == 'Yes'\n"""],
         ["assert file_name_check(\"example.txt\") == 'Yes'\n", "assert file_name_check('.txt') == 'No'\n"],
     ],
     "find_closest_elements.py": [
-        ["assert find_closest_elements([1.0, 2.0, 3.9, 4.0, 5.0, 2.2]) == (3.9, 4.0)\n"],
-        ["assert find_closest_elements([1.0, 2.0, 5.9, 4.0, 5.0]) == (5.0, 5.9)\n"],
-        ["assert find_closest_elements([1.0, 2.0, 3.9, 4.0, 5.0, 2.2]) == (3.9, 4.0)\n", "assert find_closest_elements([1.0, 2.0, 5.9, 4.0, 5.0]) == (5.0, 5.9)\n"],
+        [""""find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])==(2.0, 2.0)\n
+        assert find_closest_elements([1.0, 2.0, 3.9, 4.0, 5.0, 2.2]) == (3.9, 4.0)\n"""],
+        ["""assert find_closest_elements([-1.0, 2.0, -5.9, -4.0, -5.0]) == (-5.0, -5.9)\n
+        assert find_closest_elements([1.0, 2.0, 5.9, 4.0, 5.0]) == (5.0, 5.9)\n"""],
+        ["""find_closest_elements([1.0, 2.0, 3.0, 4.0, 5.0, 2.0])==(2.0, 2.0)\n
+        assert find_closest_elements([1.0, 2.0, 3.9, 4.0, 5.0, 2.2]) == (3.9, 4.0)\n""", "assert find_closest_elements([-1.0, 2.0, -5.9, -4.0, -5.0]) == (-5.0, -5.9)\n"],
     ],
     "numerical_letter_grade.py": [
-        ["assert numerical_letter_grade([4.0, 3, 1.7, 2, 3.5]) == ['A+', 'B', 'C-', 'C', 'A-']\n"],
-        ["assert numerical_letter_grade([1.2]) == ['D+']\n"],
-        ["assert numerical_letter_grade([4.0, 3, 1.7, 2, 3.5]) == ['A+', 'B', 'C-', 'C', 'A-']\n", "assert numerical_letter_grade([1.2]) == ['D+']\n"],
+        ["assert numerical_letter_grade([4.0, 3.8, 3.5, 3.1, 3, 2.7, 2.3, 2, 1.7,1.3,1.0,0.7,0]) == ['A+', 'A','A-','B+', 'B', 'B-','C+','C','C-','D+','D','D-','E']\n"],
+        ["""assert numerical_letter_grade([4.0, 3.8, 3.5, 3.1, 3, 2.7])==['A+', 'A','A-','B+', 'B', 'B-']\n
+        [1.2]) == ['D+']\n"""],
+        ["""assert numerical_letter_grade([4.0, 3, 1.7, 2, 3.5]) == ['A+', 'B', 'C-', 'C', 'A-']\n
+        assert numerical_letter_grade([4.0, 3.8, 3.5, 3.1, 3, 2.7, 2.3, 2, 1.7,1.3,1.0,0.7,0]) == ['A+', 'A','A-','B+', 'B', 'B-','C+','C','C-','D+','D','D-','E']\n""", """assert numerical_letter_grade([4.0, 3.8, 3.5, 3.1, 3, 2.7, 2.3, 2, 1.7,1.3,1.0,0.7,0]) == ['A+', 'A','A-','B+', 'B', 'B-','C+','C','C-','D+','D','D-','E']\n
+        assert numerical_letter_grade([1.2]) == ['D+']\n"""],
     ],
     "separate_paren_groups.py": [
         ["assert separate_paren_groups('(()()) ((())) () ((())()())') == ['(()())', '((()))', '()', '((())()())']\n"],
         ["assert separate_paren_groups('() (()) ((())) (((())))') == ['()', '(())', '((()))', '(((())))']\n"],
-        ["assert separate_paren_groups('(()()) ((())) () ((())()())') == ['(()())', '((()))', '()', '((())()())']\n", "assert separate_paren_groups('() (()) ((())) (((())))') == ['()', '(())', '((()))', '(((())))']\n"],
+        ["""assert separate_paren_groups('() (()) ((())) (((())))') == ['()', '(())', '((()))', '(((())))']\n
+        assert separate_paren_groups('(()()) ((())) () ((())()())') == ['(()())', '((()))', '()', '((())()())']\n
+        assert separate_paren_groups('()')==['()']\n
+        assert separate_paren_groups('')==[]\n""", "assert separate_paren_groups('() (()) ((())) (((())))') == ['()', '(())', '((()))', '(((())))']\n"],
     ],
 }
 
@@ -82,14 +91,15 @@ for func, func_path in functions_to_test_and_paths:
         # Generate the prompt with few-shot example
         prompt = prompt_generator.generate_prompt([few_shot_prompt])
         examples_length=len(few_shot_prompt)
-        print(f"THE PROMPT for fewshot technique of examples length = {examples_length} {prompt}")
+        # print(f"THE PROMPT for fewshot technique of examples length = {examples_length} {prompt}")
         test_code, test_name = llm_generator.create_test_function(prompt)
 
         # Save the generated test to a file
         filename = f"test_different_fewshots{i}_length{examples_length}_{func.__name__}.py"
         i+=1
-        with open(filename, 'w') as f:
-            f.write(test_code)
+        llm_generator.write_test_to_file(test_code, filename=filename)
+        # with open(filename, 'w') as f:
+        #     f.write(test_code)
         print(f"Generated test saved as {filename}")
         input("Review the generated test file. Press Enter to continue...")
         
@@ -100,20 +110,13 @@ for func, func_path in functions_to_test_and_paths:
     
         executor2 = AbstractExecutor(test_func)
         coverage_data = executor2._execute_input(func)
-        print(coverage_data)
+        # print(coverage_data)
 
         if coverage_data['coverage']:
             covered_lines = coverage_data['coverage']['covered_lines']
-            num_statements = coverage_data['coverage']['num_statements']
-            # missing_lines = coverage_data['coverage']['missing_lines']
-            excluded_lines = coverage_data['coverage']['excluded_lines']
-
-            # Adjusting total executable lines by subtracting excluded lines
-            total_executable_lines = num_statements - excluded_lines
-
-            # Calculating adjusted line coverage percentage
-            line_coverage_percentage = (covered_lines / total_executable_lines) * 100
-
+            line_coverage_percentage = coverage_data['coverage']['percent_covered']
+            
+            #calculating branch cooverage
             total_branches = coverage_data['coverage']['num_branches'] 
             total_covered_branches=coverage_data['coverage']['covered_branches'] + 0.5 * coverage_data['coverage']['num_partial_branches']
             branch_coverage_percentage = (total_covered_branches / total_branches) * 100
@@ -121,6 +124,8 @@ for func, func_path in functions_to_test_and_paths:
             print(f"For the PUT {str(func.__name__)} different few shots with examples length = {examples_length}:\n  Line coverage percentage is {round(line_coverage_percentage,4)}%, Branch coverage percentage is {round(branch_coverage_percentage,4)}%")
         else:
             print("LLM generated an incorrect test case, please edit the generated tests or rerun")
+        
+        print("Coverage Data: ",coverage_data)
 
         # # Cleanup
         # os.remove(filename)

@@ -12,16 +12,6 @@ import json
 import torch
 import importlib
 
-executor = AbstractExecutor(test_file_name_check)
-coverage_data = executor._execute_input()
-# print(coverage_data)
-
-line_coverage_percentage = (coverage_data['coverage']['covered_lines'] / coverage_data['coverage']['num_statements']) * 100
-branch_coverage_percentage = (coverage_data['coverage']['covered_branches'] / coverage_data['coverage']['num_branches']) * 100
-
-print(f"For the PUT file_name_check:\n Line coverage percentage is {round(line_coverage_percentage,4)}%, Branch coverage percentage is {round(branch_coverage_percentage,4)}%")
-
-
 executor = AbstractExecutor(test_closest_integer)
 coverage_data = executor._execute_input()
 # print(coverage_data)
@@ -31,14 +21,31 @@ branch_coverage_percentage = (coverage_data['coverage']['covered_branches'] / co
 
 print(f"For the PUT closest_integer:\n Line coverage percentage is {round(line_coverage_percentage,4)}%, Branch coverage percentage is {round(branch_coverage_percentage,4)}%")
 
+executor = AbstractExecutor(test_file_name_check)
+coverage_data = executor._execute_input()
+# print(coverage_data)
+line_coverage_percentage = coverage_data['coverage']['percent_covered']
+        
+#calculating branch coverage
+total_branches = coverage_data['coverage']['num_branches'] 
+total_covered_branches=coverage_data['coverage']['covered_branches'] + 0.5 * coverage_data['coverage']['num_partial_branches']
+branch_coverage_percentage = (total_covered_branches / total_branches) * 100
+
+print(f"For the PUT file_name_check:\n Line coverage percentage is {round(line_coverage_percentage,4)}%, Branch coverage percentage is {round(branch_coverage_percentage,4)}%")
+
+
 
 executor = AbstractExecutor(test_find_closest_elements)
 coverage_data = executor._execute_input()
 # print(coverage_data)
 
-line_coverage_percentage = (coverage_data['coverage']['covered_lines'] / coverage_data['coverage']['num_statements']) * 100
-branch_coverage_percentage = (coverage_data['coverage']['covered_branches'] / coverage_data['coverage']['num_branches']) * 100
-
+line_coverage_percentage = coverage_data['coverage']['percent_covered']
+        
+#calculating branch coverage
+total_branches = coverage_data['coverage']['num_branches'] 
+total_covered_branches=coverage_data['coverage']['covered_branches'] + 0.5 * coverage_data['coverage']['num_partial_branches']
+branch_coverage_percentage = (total_covered_branches / total_branches) * 100
+ 
 print(f"For the PUT find_closest_elements:\n Line coverage percentage is {round(line_coverage_percentage,4)}%, Branch coverage percentage is {round(branch_coverage_percentage,4)}%")
 
 
@@ -46,8 +53,12 @@ executor = AbstractExecutor(test_numerical_letter_grade)
 coverage_data = executor._execute_input()
 # print(coverage_data)
 
-line_coverage_percentage = (coverage_data['coverage']['covered_lines'] / coverage_data['coverage']['num_statements']) * 100
-branch_coverage_percentage = (coverage_data['coverage']['covered_branches'] / coverage_data['coverage']['num_branches']) * 100
+line_coverage_percentage = coverage_data['coverage']['percent_covered']
+        
+#calculating branch coverage
+total_branches = coverage_data['coverage']['num_branches'] 
+total_covered_branches=coverage_data['coverage']['covered_branches'] + 0.5 * coverage_data['coverage']['num_partial_branches']
+branch_coverage_percentage = (total_covered_branches / total_branches) * 100
 
 print(f"For the PUT numerical_letter_grade:\n Line coverage percentage is {round(line_coverage_percentage,4)}%, Branch coverage percentage is {round(branch_coverage_percentage,4)}%")
 
@@ -56,8 +67,12 @@ executor = AbstractExecutor(test_separate_paren_groups)
 coverage_data = executor._execute_input()
 # print(coverage_data)
 
-line_coverage_percentage = (coverage_data['coverage']['covered_lines'] / coverage_data['coverage']['num_statements']) * 100
-branch_coverage_percentage = (coverage_data['coverage']['covered_branches'] / coverage_data['coverage']['num_branches']) * 100
+line_coverage_percentage = coverage_data['coverage']['percent_covered']
+        
+#calculating branch coverage
+total_branches = coverage_data['coverage']['num_branches'] 
+total_covered_branches=coverage_data['coverage']['covered_branches'] + 0.5 * coverage_data['coverage']['num_partial_branches']
+branch_coverage_percentage = (total_covered_branches / total_branches) * 100
 
 print(f"For the PUT separate_paren_groups:\n Line coverage percentage is {round(line_coverage_percentage,4)}%, Branch coverage percentage is {round(branch_coverage_percentage,4)}%")
 
