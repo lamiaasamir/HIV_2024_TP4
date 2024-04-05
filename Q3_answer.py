@@ -34,7 +34,10 @@ file_paths = {
     "numerical_letter_grade.py": "poly_llm/to_test/numerical_letter_grade.py",
     "separate_paren_groups.py": "poly_llm/to_test/separate_paren_groups.py",
 }
+"""
+The Salesforce codet5p-770m-py model is part of the CodeT5+ family, an advanced series of large language models designed for a broad spectrum of code-related tasks, both in understanding and generation. This model operates using an encoder-decoder architecture, allowing for versatility in application across different modes such as encoder-only, decoder-only, and the full encoder-decoder functionality.
 
+"""
 model_name = "Salesforce/codet5p-770m-py"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = T5ForConditionalGeneration.from_pretrained(model_name)
